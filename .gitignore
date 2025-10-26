@@ -1,0 +1,55 @@
+# Composer dependencies
+/vendor/
+
+# Environment variables (sensitive data)
+.env
+.env.local
+.env.*.local
+
+# Data files (user-generated content)
+/data/tickets.json
+/data/*.json
+
+# Operating System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Desktop.ini
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+
+# PHP
+composer.phar
+/phpunit.xml
+.phpunit.result.cache
+
+# Build files (if you add any build process later)
+/build/
+/dist/
+
+# Backup files
+*.bak
+*.backup
