@@ -26,7 +26,6 @@ class AuthController {
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
 
-        // Simple validation
         if (empty($email) || empty($password)) {
             echo $this->twig->render('pages/login.twig', [
                 'errors' => ['general' => 'All fields are required'],
@@ -35,7 +34,6 @@ class AuthController {
             return;
         }
 
-        // Fake authentication (you can replace with DB check)
         if ($email === 'admin@example.com' && $password === 'password123') {
             Session::set('user', ['email' => $email]);
             header('Location: /dashboard');
@@ -48,7 +46,43 @@ class AuthController {
         }
     }
 
-    // 🟢 Logout
+    // 🟢 Show signup page
+    public function showSignup() {
+        echo $this->twig->render('pages/signup.twig', [
+            'form' => [],
+            'errors' => []
+        ]);
+    }
+
+    // 🟢 Handle signup submission
+    public function signup() {
+        $name = $_POST['name'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $password = $_POST['password'] ?? '';
+        $confirm = $_POST['confirm'] ?? '';
+
+        $errors = [];
+
+        if (!$name) $errors['name'] = 'Name is required';
+        if (!$email || !str_contains($email, '@')) $errors['email'] = 'Invalid email';
+        if (!$password || strlen($password) < 6) $errors['password'] = 'Password too short';
+        if ($password !== $confirm) $errors['confirm'] = 'Passwords do not match';
+
+        if (!empty($errors)) {
+            echo $this->twig->render('pages/signup.twig', [
+                'errors' => $errors,
+                'form' => ['name' => $name, 'email' => $email]
+            ]);
+            return;
+        }
+
+        // Fake registration (replace with DB storage)
+        Session::set('user', ['name' => $name, 'email' => $email]);
+        header('Location: /dashboard');
+        exit;
+    }
+
+    // Logout
     public function logout() {
         Session::destroy();
         header('Location: /auth/login?m=session_expired');
