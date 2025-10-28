@@ -1,10 +1,10 @@
 <?php
 // scripts/migrate.php
 error_reporting(E_ALL);
-$host = getenv('DB_HOST') ?: '127.0.0.1';
-$db   = getenv('DB_NAME') ?: 'ticket_app';
-$user = getenv('DB_USER') ?: 'root';
-$pass = getenv('DB_PASS') ?: '';
+$host = getenv('MYSQLHOST') ?: 'mysql.railway.internal';
+$db   = getenv('MYSQL_DATABASE') ?: 'railway';
+$user = getenv('MYSQLUSER') ?: 'root';
+$pass = getenv('MYSQLPASSWORD') ?: '';
 $port = getenv('DB_PORT') ?: 3306;
 $dsn = "mysql:host={$host};port={$port};dbname={$db};charset=utf8mb4";
 
