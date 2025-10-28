@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="antialiased text-gray-900">
+    {% include 'partials/navbar.twig' %}
     {% block content %}{% endblock %}
+    {% include 'partials/footer.twig' %}
   </body>
 </html>
