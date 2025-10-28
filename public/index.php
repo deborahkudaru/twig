@@ -26,5 +26,8 @@ $router->add('GET', '/tickets', [TicketController::class, 'index']);
 $router->add('POST', '/tickets/create', [TicketController::class, 'create']);
 $router->add('POST', '/tickets/update', [TicketController::class, 'update']);
 $router->add('POST', '/tickets/delete', [TicketController::class, 'delete']);
+$router->add('GET', '/tickets/new', [TicketController::class, 'showCreateForm']);
+$router->add('POST', '/tickets/new', [TicketController::class, 'create']);
+
 
 $router->dispatch();

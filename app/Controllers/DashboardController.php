@@ -5,11 +5,18 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use App\Utils\Session;
 
+
 class DashboardController {
     private $twig;
 
     public function __construct() {
-        $loader = new FilesystemLoader(__DIR__ . '/../../templates');
+        $loader = new FilesystemLoader([
+    __DIR__ . '/../../templates',
+    __DIR__ . '/../../templates/layout',
+    __DIR__ . '/../../templates/pages',
+    __DIR__ . '/../../templates/partials'
+]);
+
         $this->twig = new Environment($loader);
     }
 

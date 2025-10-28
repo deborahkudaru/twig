@@ -4,23 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Dashboard{% endblock %}</title>
-  <link rel="stylesheet" href="/path/to/tailwind.css">
+     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 min-h-screen flex">
 
   {# Sidebar #}
-  {% include 'sidebar.twig' with {'isOpen': sidebarOpen} %}
+  {% include 'partials/sidebar.twig' with {'isOpen': sidebarOpen} %}
 
   <div class="flex-1 flex flex-col">
     {# Navbar #}
-    {% include 'dashboard_navbar.twig' %}
+    {% include 'partials/dashboard_navbar.twig' %}
 
     <main class="p-6 max-w-[1440px] w-full mx-auto">
       {% block content %}{% endblock %}
     </main>
 
     {# Footer #}
-    {% include 'footer.twig' %}
+    {% include 'partials/footer.twig' %}
   </div>
 
 </body>
