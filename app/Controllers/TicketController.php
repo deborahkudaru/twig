@@ -63,16 +63,18 @@ class TicketController {
         exit;
     }
 
-    public function edit($id) {
-        $ticket = $this->ticketService->getTicketById($id);
+    public function edit($id)
+{
+    $ticket = $this->ticketService->getTicketById($id);
 
-        echo $this->twig->render('pages/ticket_form.twig', [
-            'action' => "/tickets/edit/$id",
-            'ticket' => $ticket,
-            'errors' => [],
-            'cancel_url' => '/tickets'
-        ]);
-    }
+    echo $this->twig->render('pages/ticket_form.twig', [
+        'action' => "/tickets/update/$id",
+        'ticket' => $ticket,
+        'errors' => [],
+        'cancel_url' => '/tickets'
+    ]);
+}
+
 
     public function update($id) {
         $title = trim($_POST['title'] ?? '');

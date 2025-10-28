@@ -12,6 +12,7 @@ Session::init();
 
 $router = new Router();
 
+// Public routes
 $router->add('GET', '/', [HomeController::class, 'index']);
 $router->add('GET', '/auth/login', [AuthController::class, 'showLogin']);
 $router->add('POST', '/auth/login', [AuthController::class, 'login']);
@@ -19,13 +20,14 @@ $router->add('GET', '/auth/signup', [AuthController::class, 'showSignup']);
 $router->add('POST', '/auth/signup', [AuthController::class, 'signup']);
 $router->add('POST', '/auth/logout', [AuthController::class, 'logout']);
 
+// Protected routes
 $router->add('GET', '/dashboard', [DashboardController::class, 'index']);
-
-$router->add('GET', '/tickets', [TicketController::class, 'index']);         
-$router->add('GET', '/tickets/new', [TicketController::class, 'create']); 
-$router->add('POST', '/tickets/store', [TicketController::class, 'store']);  
-$router->add('GET', '/tickets/edit/(\d+)', [TicketController::class, 'edit']); 
-$router->add('POST', '/tickets/update/(\d+)', [TicketController::class, 'update']); 
-$router->add('GET', '/tickets/delete/(\d+)', [TicketController::class, 'delete']); 
+$router->add('GET', '/tickets', [TicketController::class, 'index']);
+$router->add('POST', '/tickets/create', [TicketController::class, 'create']);
+$router->add('POST', '/tickets/update/{id}', [TicketController::class, 'update']);
+$router->add('GET', '/tickets/edit/{id}', [TicketController::class, 'edit']);
+$router->add('GET', '/tickets/delete/{id}', [TicketController::class, 'delete']);
+$router->add('GET', '/tickets/new', [TicketController::class, 'showCreateForm']);
+$router->add('POST', '/tickets/new', [TicketController::class, 'create']);
 
 $router->dispatch();
