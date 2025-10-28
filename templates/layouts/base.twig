@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ title|default('Ticket App') }}</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="min-h-screen flex flex-col bg-slate-50 text-gray-800">
-
-  {% include 'components/navbar.twig' %}
-
-  <main class="flex-1 py-8">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ title|default("Ticket Tocket") }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="antialiased text-gray-900">
     {% block content %}{% endblock %}
-  </main>
-
-  {% include 'components/footer.twig' %}
-
-</body>
+  </body>
 </html>
