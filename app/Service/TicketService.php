@@ -8,7 +8,6 @@ class TicketService {
     private $db;
 
     public function __construct() {
-        // Database connection (edit your DB name, user, and password)
         $dsn = 'mysql:host=127.0.0.1;dbname=ticket_app;charset=utf8mb4';
         $username = 'root';
         $password = '';

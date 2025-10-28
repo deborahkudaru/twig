@@ -13,10 +13,8 @@ class TicketController {
         $this->twig = new Environment($loader);
     }
 
-    // 🟢 Show all tickets
     public function index() {
         try {
-            // Example: Fetch tickets (replace with actual DB/service)
             $tickets = [
                 ['id' => 1, 'title' => 'Login Issue', 'status' => 'open', 'description' => 'Cannot log in with my credentials.'],
                 ['id' => 2, 'title' => 'Payment Delay', 'status' => 'in_progress', 'description' => 'My payment is stuck.'],
@@ -33,7 +31,6 @@ class TicketController {
         ]);
     }
 
-    // 🟢 Handle create ticket form
     public function create() {
         $errors = [];
         $title = trim($_POST['title'] ?? '');
@@ -74,12 +71,10 @@ class TicketController {
     ]);
 }
 
-    // 🟢 Stub for update ticket (can extend later)
     public function update() {
         echo "Update ticket logic coming soon.";
     }
 
-    // 🟢 Stub for delete ticket
     public function delete() {
         echo "Delete ticket logic coming soon.";
     }
