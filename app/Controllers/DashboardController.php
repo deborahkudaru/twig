@@ -1,13 +1,30 @@
-$stats = [
-  'total' => 42,
-  'open' => 10,
-  'resolved' => 32
-];
+<?php
+namespace App\Controllers;
 
-echo $twig->render('dashboard.twig', [
-  'stats' => $stats,
-  'error' => $error ?? null
-]);
-echo $twig->render('partials/dashboard_navbar.twig', [
-  'session' => $_SESSION
-]);
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
+use App\Utils\Session;
+
+class DashboardController {
+    private $twig;
+
+    public function __construct() {
+        $loader = new FilesystemLoader(__DIR__ . '/../../templates');
+        $this->twig = new Environment($loader);
+    }
+
+    public function index() {
+        // Dummy stats data
+        $stats = [
+            'total' => 42,
+            'open' => 10,
+            'resolved' => 32
+        ];
+
+        // Render dashboard page
+        echo $this->twig->render('pages/dashboard.twig', [
+            'stats' => $stats,
+            'user' => Session::get('user')
+        ]);
+    }
+}
