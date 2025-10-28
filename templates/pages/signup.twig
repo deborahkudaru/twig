@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create Account</title>
-  <link href="/css/output.css" rel="stylesheet">
-</head>
-<body class="min-h-screen bg-white flex items-center justify-center px-4">
+{% extends "layout/base.twig" %}
+
+{% block content %}
+<div class="min-h-screen bg-white flex items-center justify-center px-4">
 
   <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-lg border border-gray-100">
     <div class="text-center mb-8">
@@ -17,28 +12,53 @@
       <div class="text-red-600 text-center mb-4">{{ error }}</div>
     {% endif %}
 
-    <form method="POST" action="/signup" class="space-y-6" novalidate>
+    <form method="POST" action="/auth/signup" class="space-y-6" novalidate>
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
-        <input name="name" type="text" value="{{ old.name|default('') }}" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent transition-colors" placeholder="Enter your full name">
+        <input
+          name="name"
+          type="text"
+          value="{{ old.name|default('') }}"
+          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent transition-colors"
+          placeholder="Enter your full name"
+        />
       </div>
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-        <input name="email" type="email" value="{{ old.email|default('') }}" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent transition-colors" placeholder="Enter your email">
+        <input
+          name="email"
+          type="email"
+          value="{{ old.email|default('') }}"
+          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent transition-colors"
+          placeholder="Enter your email"
+        />
       </div>
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-        <input name="password" type="password" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent transition-colors" placeholder="Create a password">
+        <input
+          name="password"
+          type="password"
+          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent transition-colors"
+          placeholder="Create a password"
+        />
       </div>
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
-        <input name="confirm" type="password" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent transition-colors" placeholder="Confirm your password">
+        <input
+          name="confirm"
+          type="password"
+          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent transition-colors"
+          placeholder="Confirm your password"
+        />
       </div>
 
-      <button type="submit" class="w-full bg-slate-600 hover:bg-slate-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200">
+      <button
+        type="submit"
+        class="w-full bg-slate-600 hover:bg-slate-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200"
+      >
         Create Account
       </button>
     </form>
@@ -46,10 +66,12 @@
     <div class="mt-6 text-center">
       <p class="text-gray-600">
         Already have an account?
-        <a href="/?page=login" class="text-slate-600 hover:text-slate-800 font-medium transition-colors">Sign in</a>
+        <a href="/auth/login" class="text-slate-600 hover:text-slate-800 font-medium transition-colors">
+          Sign in
+        </a>
       </p>
     </div>
   </div>
 
-</body>
-</html>
+</div>
+{% endblock %}
