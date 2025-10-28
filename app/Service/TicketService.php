@@ -8,14 +8,20 @@ class TicketService {
     private $db;
 
     public function __construct() {
-        $dsn = 'mysql:host=127.0.0.1;dbname=ticket_app;charset=utf8mb4';
+        // Railway database configuration
+        $host = 'mysql.railway.internal';
+        $port = '3306';
+        $dbname = 'railway';
         $username = 'root';
-        $password = '';
+        $password = 'bbsraMnjCgTmZtTtzPtLaoeyzHhShcpS';
+
+        $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
 
         try {
             $this->db = new PDO($dsn, $username, $password, [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_TIMEOUT => 30,
             ]);
         } catch (Exception $e) {
             throw new Exception("Database connection failed: " . $e->getMessage());

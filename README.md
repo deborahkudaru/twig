@@ -14,5 +14,14 @@ A ticket managemnet system where you can create, eidt and update your tickets.Bu
 ```bash
 git clone https://github.com/deborahkudaru/twig.git
 cd twig
-npm install
-npm run dev
+
+composer install
+
+#run text to vrify setup
+./vendor/bin/simple-phpunit
+
+#start server
+php -S localhost:8000 -t public
+
+# visit
+http://localhost:8000
