@@ -1,0 +1,87 @@
+<form 
+  action="{{ action }}" 
+  method="POST" 
+  class="space-y-4 sm:space-y-6"
+>
+  <div>
+    <label class="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+      Title <span class="text-red-500">*</span>
+    </label>
+    <input
+      type="text"
+      name="title"
+      value="{{ ticket.title|default('') }}"
+      class="w-full border rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent transition-colors {{ errors.title ? 'border-red-300' : 'border-gray-300' }}"
+      placeholder="Enter ticket title"
+      required
+      minlength="3"
+    >
+    {% if errors.title %}
+      <div class="text-red-600 text-xs sm:text-sm mt-1.5 sm:mt-2 flex items-center">
+        <span class="mr-1">⚠</span>
+        {{ errors.title }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+      Status <span class="text-red-500">*</span>
+    </label>
+    <select 
+      name="status"
+      class="w-full border rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent transition-colors {{ errors.status ? 'border-red-300' : 'border-gray-300' }}"
+      required
+    >
+      {% set current = ticket.status|default('open') %}
+      <option value="open" {{ current == 'open' ? 'selected' }}>Open</option>
+      <option value="in_progress" {{ current == 'in_progress' ? 'selected' }}>In Progress</option>
+      <option value="closed" {{ current == 'closed' ? 'selected' }}>Closed</option>
+    </select>
+    {% if errors.status %}
+      <div class="text-red-600 text-xs sm:text-sm mt-1.5 sm:mt-2 flex items-center">
+        <span class="mr-1">⚠</span>
+        {{ errors.status }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+      Description
+      <span class="text-gray-500 text-xs font-normal ml-2">
+        {{ ticket.description|length|default(0) }}/2000
+      </span>
+    </label>
+    <textarea
+      name="description"
+      rows="4"
+      maxlength="2000"
+      placeholder="Describe the issue or request..."
+      class="w-full border rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent transition-colors resize-none {{ errors.description ? 'border-red-300' : 'border-gray-300' }}"
+    >{{ ticket.description|default('') }}</textarea>
+    {% if errors.description %}
+      <div class="text-red-600 text-xs sm:text-sm mt-1.5 sm:mt-2 flex items-center">
+        <span class="mr-1">⚠</span>
+        {{ errors.description }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="flex flex-col-reverse sm:flex-row gap-2 sm:gap-3 pt-2 sm:pt-4">
+    {% if cancel_url %}
+      <a 
+        href="{{ cancel_url }}"
+        class="px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200 flex-1 text-sm sm:text-base text-center"
+      >
+        Cancel
+      </a>
+    {% endif %}
+    <button 
+      type="submit" 
+      class="bg-slate-600 hover:bg-slate-700 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium transition-colors duration-200 flex-1 text-sm sm:text-base"
+    >
+      {{ ticket.id ? 'Update Ticket' : 'Create Ticket' }}
+    </button>
+  </div>
+</form>
