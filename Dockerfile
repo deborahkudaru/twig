@@ -1,23 +1,33 @@
-# Use official PHP + Apache image
-FROM php:8.1-apache
+# Use official PHP image with composer
+FROM php:8.2-cli
 
-# Copy project files into the container
-COPY . /var/www/html/
+# Set working dir
+WORKDIR /app
 
-# Set working directory
-WORKDIR /var/www/html
+# Install system deps (pdo mysql etc)
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    libzip-dev \
+    libonig-dev \
+    default-mysql-client \
+  && docker-php-ext-install pdo_mysql zip
 
-# Install PHP extensions if needed (optional)
-RUN docker-php-ext-install json
+# Install composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Enable Apache mod_rewrite if using routing
-RUN a2enmod rewrite
+# Copy project
+COPY . /app
 
-# Make Twig cache folder writable
-RUN mkdir -p cache && chmod 777 cache
+# Install PHP deps
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Expose default HTTP port
-EXPOSE 80
+# Ensure logs/ tmp dirs exist
+RUN mkdir -p /app/storage && chown -R www-data:www-data /app/storage || true
 
-# Start Apache in foreground (Render uses container port 10000 by default)
-CMD ["apache2-foreground"]
+# Expose port (Railway sets $PORT anyway)
+ENV PORT 8080
+EXPOSE 8080
+
+# Run migrations (safe: run then start server)
+CMD php scripts/migrate.php || true && php -S 0.0.0.0:${PORT:-8080} -t public
