@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title|default('Ticket App') }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-gray-800">
+
+  {% include 'components/navbar.twig' %}
+
+  <main class="flex-1 py-8">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include 'components/footer.twig' %}
+
+</body>
+</html>

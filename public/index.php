@@ -8,10 +8,8 @@ use App\Controllers\AuthController;
 use App\Controllers\DashboardController;
 use App\Controllers\TicketController;
 
-// Initialize session
 Session::init();
 
-// Initialize router
 $router = new Router();
 
 // Public routes
@@ -29,5 +27,4 @@ $router->add('POST', '/tickets/create', [TicketController::class, 'create']);
 $router->add('POST', '/tickets/update', [TicketController::class, 'update']);
 $router->add('POST', '/tickets/delete', [TicketController::class, 'delete']);
 
-// Dispatch request
 $router->dispatch();
